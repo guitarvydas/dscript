@@ -10,7 +10,7 @@ ASCbody
   | Container
 
 Leaf = CodeBlock
-Container = Children Connections
+Container = Children Nets Connections
 
 InputPortDef = MaybePort
 OutputPortDef = MaybePort
@@ -20,37 +20,49 @@ MaybePort
   | Port    -- port
   
 CodeBlock = "code" codeBlock
-Children = "children" Child+
+Children = "children" ChildReference+
+Nets = "nets" Net+
 Connections = "connections" Connection+
 
+Net
+  = NetName NetReceiver+
+
+NetName = ">>" netChar+ ">>"
+NetReceiver = Component
+
 Connection
-  = ConnectionSelfSender
-  | ConnectionChildSender
-ConnectionChildSender = ChildSender Connector Receiver MoreReceiver*
-ConnectionSelfSender = SelfSender Connector Receiver MoreReceiver*
+  = ConnectionSelfSenderChildReceiver
+  | ConnectionSelfSenderSelfReceiver
+  | ConnectionChildSenderChildReceiver
+  | ConnectionChildSenderSelfReceiver
 
-MoreReceiver = "," Receiver
+ConnectionSelfSenderChildReceiver = SelfSender NetName ChildReceiver
+ConnectionSelfSenderSelfReceiver = SelfSender NetName SelfReceiver
+ConnectionChildSenderChildReceiver = ChildSender NetName ChildReceiver
+ConnectionChildSenderSelfReceiver = ChildSender NetName SelfReceiver
 
-SelfSender = "[" "$self" "]" SenderPort
-ChildSender = SenderName SenderPort
-
-Receiver 
-  = "$return"                 -- return
-  | ReceiverName ReceiverPort -- child
-
-Child = Component
+ChildReference = ChildComponent
 ASCdefName = Component
 
 
+SelfSender = selfComponent SenderPort
+ChildSender = ChildComponent SenderPort
 
-SenderName = Component
+SelfReceiver 
+  = "$return"                  -- return
+  | selfComponent ReceiverPort -- selfWithPort
+ChildReceiver 
+  = ReceiverComponent ReceiverPort
+
+ReceiverComponent = ChildComponent
 SenderPort = Port
-ReceiverName = Component
 ReceiverPort = Port
 
-Component = "[" componentName "]"
+Component = selfComponent | ChildComponent
+ChildComponent = "[" componentName "]"
+selfComponent = "[" "$self" "]"
 componentName
-  = "$self"            -- self
+  = selfComponent      -- self
   | componentNameChar+ -- chars
 componentNameChar
   = ~"$self" ~"]" any
@@ -67,4 +79,5 @@ language = "bash"
 anyChar
   = "{" anyChar* "}" -- nested
   | ~"}" any         -- flat
+netChar = ~">>" any
 }

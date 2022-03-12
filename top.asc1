@@ -1,9 +1,9 @@
 [top]($in) >> ()
   children [clone] [make] [exec]
   nets
-     >> n1 >> [clone]
-     >> n2 >> [make]
-     >> n3 >> [exec]
+     n1 >> [clone]
+     n2 >> [make]
+     n3 >> [exec]
   connections
      [$self]($in) >> n1 >> [clone]($in)
      [clone]($out) >> n2 >> [make]($in)
@@ -20,8 +20,8 @@
 [clone] ($in) >> ($out)
   children [clean] [git clone]
   nets
-    >> n1 >> [clean]
-    >> n2 >> [git clone]
+    n1 >> [clean]
+    n2 >> [git clone]
   connections
     [$self]($in) >> n1 >> [clean]($in)
     [clean]($out) >> n2 >> [git clone] ($in)
@@ -30,8 +30,8 @@
 [clone/clean] ($in) >> ($out)
   children [clean 1] [clean 2]
   nets  
-    >> n1 >> [clean 1]
-    >> n2 >> [clean 2]
+    n1 >> [clean 1]
+    n2 >> [clean 2]
   connections
     [$self] ($in) >> n1 >> [clean 1] ($in)
     [clean 1] ($out) >> n2 >> [clean 2] ($in)
