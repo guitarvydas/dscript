@@ -1,26 +1,26 @@
 
 # child clone
-duct_clone_in=/tmp/duct_clone_in
-duct_clone_out=/tmp/duct_clone_out
-mkfifo ${duct_clone_in} ${duct_clone_out}
-clone <${duct_clone_in} >${duct_clone_out} &
+duct_top_clone___in=/tmp/duct_top_clone___in
+duct_top_clone___out=/tmp/duct_top_clone___out
+mkfifo ${duct_top_clone___in} ${duct_top_clone___out}
+top_clone <${duct_top_clone___in} >${duct_top_clone___out} &
 
 # child make
-duct_make_in=/tmp/duct_make_in
-duct_make_out=/tmp/duct_make_out
-mkfifo ${duct_make_in} ${duct_make_out}
-make <${duct_make_in} >${duct_make_out} &
+duct_top_make___in=/tmp/duct_top_make___in
+duct_top_make___out=/tmp/duct_top_make___out
+mkfifo ${duct_top_make___in} ${duct_top_make___out}
+top_make <${duct_top_make___in} >${duct_top_make___out} &
 
 # child exec
-duct_exec_in=/tmp/duct_exec_in
-duct_exec_out=/tmp/duct_exec_out
-mkfifo ${duct_exec_in} ${duct_exec_out}
-exec <${duct_exec_in} >${duct_exec_out} &
+duct_top_exec___in=/tmp/duct_top_exec___in
+duct_top_exec___out=/tmp/duct_top_exec___out
+mkfifo ${duct_top_exec___in} ${duct_top_exec___out}
+top_exec <${duct_top_exec___in} >${duct_top_exec___out} &
 
 # connections
-cat <${duct_$self____in} >${duct_clone____in} &
-cat <${duct_clone____out} >${duct_make____in} &
-cat <${duct_make____out} >${duct_exec____in} &
-cat <${duct_exec____out} >${$return} &
+echo $1 >${duct_top_clone____in} &
+cat <${top_clone___out} >${duct_top_make____in} &
+cat <${top_make___out} >${duct_top_exec____in} &
+cat <${top_exec___out} >${$return} &
 
 

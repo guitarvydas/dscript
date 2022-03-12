@@ -2,7 +2,10 @@ ASCs [@ascs] = {{support.resetNames (); }}[[${ascs}]]
 
 ASC [name body] = 
 {{support.pushComponentName (_name._glue ());}}
-[[cat >${support.mangleDefName (name)}.bash <<'~~~'\n${body}\n${support.popComponentName ()}\n~~~\n]]
+[[cat >${support.mangleDefName (name)}.bash <<'~~~'\n${body}\n${support.popComponentName ()}
+~~~
+chmod a+x ${support.mangleDefName (name)}.bash
+]]
 
 ASCname [name @inputs connector @outputs] = [[${name}]]
 
@@ -21,21 +24,26 @@ CodeBlock [k codeBlock] = [[${codeBlock}]]
 Children [k @Children] = [[${Children}]]
 Connections [k @Connection] = [[# ${k}\n${Connection}]]
 
-Connection [Sender Connector Receiver @MoreReceiver] =
+Connection [x] = [[${x}]]
+ConnectionSelfSender [Sender Connector Receiver @MoreReceiver] =
+  [[echo $1 >\$\{${Receiver}\} &\n]]
+ConnectionChildSender [Sender Connector Receiver @MoreReceiver] =
   [[cat <\$\{${Sender}\} >\$\{${Receiver}\} &\n]]
   
 MoreReceiver [k Receiver] = [[${support.panic_not_allowed_in_bash ()}]]
 
-Sender [Component Port] = [[duct_${Component}_${Port}]]
+ChildSender [Component Port] = [[${Component}${Port}]]
+SelfSender [lb k rb Port] = [[${lb}${k}${rb}${Port}]]
+
 Receiver_return [k] = [[${k}]]
 Receiver_child [Component Port] = [[duct_${Component}_${Port}]]
 
 Child [name] = [[
 # child ${name}
-duct_${name}_in=/tmp/duct_${name}_in
-duct_${name}_out=/tmp/duct_${name}_out
-mkfifo \$\{duct_${name}_in\} \$\{duct_${name}_out\}
-${name} <\$\{duct_${name}_in\} >\$\{duct_${name}_out\} &
+duct_${support.mangleChildName (name)}___in=/tmp/duct_${support.mangleChildName (name)}___in
+duct_${support.mangleChildName (name)}___out=/tmp/duct_${support.mangleChildName (name)}___out
+mkfifo \$\{duct_${support.mangleChildName (name)}___in\} \$\{duct_${support.mangleChildName (name)}___out\}
+${support.mangleChildName (name)} <\$\{duct_${support.mangleChildName (name)}___in\} >\$\{duct_${support.mangleChildName (name)}___out\} &
 ]]
 
 ASCdefName [name] = [[${support.mangleChildName (name)}]]
@@ -57,3 +65,8 @@ anyChar_flat [c] = [[${c}]]
 ASCdefName [name] = [[${name}]]
 InputPortDef [name] = [[${name}]]
 OutputPortDef [name] = [[${name}]]
+
+SenderName [n] = [[${support.mangleChildName (n)}]]
+SenderPort [p] = [[${p}]]
+ReceiverName [n] = [[${support.mangleChildName (n)}]]
+ReceiverPort [p] = [[${p}]]

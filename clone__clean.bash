@@ -1,19 +1,19 @@
 
 # child clean 1
-duct_clean 1_in=/tmp/duct_clean 1_in
-duct_clean 1_out=/tmp/duct_clean 1_out
-mkfifo ${duct_clean 1_in} ${duct_clean 1_out}
-clean 1 <${duct_clean 1_in} >${duct_clean 1_out} &
+duct_clone/clean_clean_1___in=/tmp/duct_clone/clean_clean_1___in
+duct_clone/clean_clean_1___out=/tmp/duct_clone/clean_clean_1___out
+mkfifo ${duct_clone/clean_clean_1___in} ${duct_clone/clean_clean_1___out}
+clone/clean_clean_1 <${duct_clone/clean_clean_1___in} >${duct_clone/clean_clean_1___out} &
 
 # child clean 2
-duct_clean 2_in=/tmp/duct_clean 2_in
-duct_clean 2_out=/tmp/duct_clean 2_out
-mkfifo ${duct_clean 2_in} ${duct_clean 2_out}
-clean 2 <${duct_clean 2_in} >${duct_clean 2_out} &
+duct_clone/clean_clean_2___in=/tmp/duct_clone/clean_clean_2___in
+duct_clone/clean_clean_2___out=/tmp/duct_clone/clean_clean_2___out
+mkfifo ${duct_clone/clean_clean_2___in} ${duct_clone/clean_clean_2___out}
+clone/clean_clean_2 <${duct_clone/clean_clean_2___in} >${duct_clone/clean_clean_2___out} &
 
 # connections
-cat <${duct_$self____in} >${duct_clean 1____in} &
-cat <${duct_clean 1____out} >${duct_clean 2____in} &
-cat <${duct_clean 2____out} >${$return} &
+echo $1 >${duct_clone/clean_clean_1____in} &
+cat <${clone/clean_clean_1___out} >${duct_clone/clean_clean_2____in} &
+cat <${clone/clean_clean_2___out} >${$return} &
 
 

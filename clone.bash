@@ -1,19 +1,19 @@
 
 # child clean
-duct_clean_in=/tmp/duct_clean_in
-duct_clean_out=/tmp/duct_clean_out
-mkfifo ${duct_clean_in} ${duct_clean_out}
-clean <${duct_clean_in} >${duct_clean_out} &
+duct_clone_clean___in=/tmp/duct_clone_clean___in
+duct_clone_clean___out=/tmp/duct_clone_clean___out
+mkfifo ${duct_clone_clean___in} ${duct_clone_clean___out}
+clone_clean <${duct_clone_clean___in} >${duct_clone_clean___out} &
 
 # child git clone
-duct_git clone_in=/tmp/duct_git clone_in
-duct_git clone_out=/tmp/duct_git clone_out
-mkfifo ${duct_git clone_in} ${duct_git clone_out}
-git clone <${duct_git clone_in} >${duct_git clone_out} &
+duct_clone_git_clone___in=/tmp/duct_clone_git_clone___in
+duct_clone_git_clone___out=/tmp/duct_clone_git_clone___out
+mkfifo ${duct_clone_git_clone___in} ${duct_clone_git_clone___out}
+clone_git_clone <${duct_clone_git_clone___in} >${duct_clone_git_clone___out} &
 
 # connections
-cat <${duct_$self____in} >${duct_clean____in} &
-cat <${duct_clean____out} >${duct_git clone____in} &
-cat <${duct_git clone____out} >${$return} &
+echo $1 >${duct_clone_clean____in} &
+cat <${clone_clean___out} >${duct_clone_git_clone____in} &
+cat <${clone_git_clone___out} >${$return} &
 
 

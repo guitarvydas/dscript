@@ -23,17 +23,30 @@ CodeBlock = "code" codeBlock
 Children = "children" Child+
 Connections = "connections" Connection+
 
-Connection = Sender Connector Receiver MoreReceiver*
+Connection
+  = ConnectionSelfSender
+  | ConnectionChildSender
+ConnectionChildSender = ChildSender Connector Receiver MoreReceiver*
+ConnectionSelfSender = SelfSender Connector Receiver MoreReceiver*
+
 MoreReceiver = "," Receiver
 
-Sender = Component Port
+SelfSender = "[" "$self" "]" SenderPort
+ChildSender = SenderName SenderPort
+
 Receiver 
-  = "$return"      -- return
-  | Component Port -- child
+  = "$return"                 -- return
+  | ReceiverName ReceiverPort -- child
 
 Child = Component
 ASCdefName = Component
 
+
+
+SenderName = Component
+SenderPort = Port
+ReceiverName = Component
+ReceiverPort = Port
 
 Component = "[" componentName "]"
 componentName

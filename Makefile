@@ -5,6 +5,9 @@ identity:
 
 bashasc:
 	./run.bash top.asc >_heredoc.bash
+	chmod a+x _heredoc.bash
+	./_heredoc.bash
+
 
 dev:
 	./run.bash test.asc >test.bash

@@ -16,11 +16,16 @@ CodeBlock [k codeBlock] = [[${k}${codeBlock}]]
 Children [k @Component] = [[${k}${Component}]]
 Connections [k @Connection] = [[${k}${Connection}]]
 
-Connection [Sender Connector Receiver @MoreReceiver] =
+Connection [x] = [[${x}]]
+ConnectionSelfSender [Sender Connector Receiver @MoreReceiver] =
+  [[${Sender}${Connector}${Receiver}${MoreReceiver}\n]]
+ConnectionChildSender [Sender Connector Receiver @MoreReceiver] =
   [[${Sender}${Connector}${Receiver}${MoreReceiver}\n]]
 MoreReceiver [k Receiver] = [[${k}${Receiver}]]
 
-Sender [Component Port] = [[${Component}${Port}]]
+ChildSender [Component Port] = [[${Component}${Port}]]
+SelfSender [lb k rb Port] = [[${lb}${k}${rb}${Port}]]
+
 Receiver_return [k] = [[${k}]]
 Receiver_child [Component Port] = [[${Component}${Port}]]
 
@@ -42,3 +47,8 @@ anyChar_flat [c] = [[${c}]]
 ASCdefName [c] = [[${c}]]
 InputPortDef [name] = [[${name}]]
 OutputPortDef [name] = [[${name}]]
+
+SenderName [n] = [[${n}]]
+SenderPort [p] = [[${p}]]
+ReceiverName [n] = [[${n}]]
+ReceiverPort [p] = [[${p}]]
