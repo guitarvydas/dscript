@@ -1,4 +1,4 @@
-ASCs [@ascs] = [[${ascs}]]
+ASCs [@ascs] = {{support.resetNames (); }}[[${ascs}]]
 
 ASC [name body] = 
 {{support.pushComponentName (_name._glue ());}}
@@ -11,33 +11,38 @@ ASCbody [x] = [[${x}]]
 Leaf [CodeBlock] = [[${CodeBlock}]]
 Container [Children Connections] = [[${Children}\n${Connections}]]
 
+InputPortDef [p] = [[${p}]]
+OutputPortDef [p] = [[${p}]]
+
 MaybePort_empty [lp rp] = [[()]]
 MaybePort_port [Port] = [[${Port}]]
   
 CodeBlock [k codeBlock] = [[${k}${codeBlock}]]
 Children [k @Children] = [[${Children}]]
-Connections [k @Connection] = [[${k}\n${Connection}]]
+Connections [k @Connection] = [[# ${k}\n${Connection}]]
 
 Connection [Sender Connector Receiver @MoreReceiver] =
-  [[${Sender}${Connector}${Receiver}\n]]
+  [[cat <\$\{${Sender}\} >\$\{${Receiver}\} &\n]]
+  
 MoreReceiver [k Receiver] = [[${support.panic_not_allowed_in_bash ()}]]
 
-Sender [Component Port] = [[${Component}${Port}]]
+Sender [Component Port] = [[duct_${Component}_${Port}]]
 Receiver_return [k] = [[${k}]]
-Receiver_child [Component Port] = [[${Component}${Port}]]
+Receiver_child [Component Port] = [[duct_${Component}_${Port}]]
 
 Child [name] = [[
-# child ${support.mangleChildName (name)}
-duct_${support.mangleChildName (name)}_in=/tmp/duct_${support.mangleChildName (name)}_in
-duct_${support.mangleChildName (name)}_out=/tmp/duct_${support.mangleChildName (name)}_out
-${support.mangleChildName (name)} <\$\{duct_${support.mangleChildName (name)}_in\} >\$\{duct_${support.mangleChildName (name)}_out\} &
+# child ${name}
+duct_${name}_in=/tmp/duct_${name}_in
+duct_${name}_out=/tmp/duct_${name}_out
+mkfifo \$\{duct_${name}_in\} \$\{duct_${name}_out\}
+${name} <\$\{duct_${name}_in\} >\$\{duct_${name}_out\} &
 ]]
 
-Component [lb componentName rb] = [[${componentName}]]
+Component [lb componentName rb] = [[${support.mangleChildName (componentName)}]]
 componentName_self [k] = [[${k}]]
 componentName_chars [@cs] = [[${cs}]]
 componentNameChar [c] = [[${c}]]
-Port [lp portName rp] = [[${lp}${portName}${rp}]]
+Port [lp portName rp] = [[${support.manglePortName (portName)}]]
 portName_in [k] = [[${k}]]
 portName_out [k] = [[${k}]]
 portName_chars [@cs] = [[${cs}]]
