@@ -3,7 +3,7 @@ ASCs = ASC+
 
 ASC = ASCname ASCbody
 
-ASCname = ASCdefName InputPortDef* Connector OutputPortDef*
+ASCname = ASCdefName InputPortDef* csyn OutputPortDef*
 
 ASCbody
   = Leaf
@@ -27,7 +27,7 @@ Connections = "connections" Connection+
 Net
   = NetName NetReceiver+
 
-NetName = ">>" netChar+ ">>"
+NetName = csyn netChar+ csyn
 NetReceiver = Component
 
 Connection
@@ -73,11 +73,11 @@ portName
   | portNameChar+ -- chars
 portNameChar
   = ~"$in" ~"$out" ~")" any
-Connector = ">>"
 codeBlock = "@{" language anyChar+ "}"
 language = "bash"
 anyChar
   = "{" anyChar* "}" -- nested
   | ~"}" any         -- flat
-netChar = ~">>" any
+netChar = ~csyn any
+csyn = ">>"
 }
