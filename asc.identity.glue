@@ -1,13 +1,13 @@
 ASCs [@ascs] = [[${ascs}]]
 
-ASC [name body] = [[${name}${body}]]
+ASC [name body] = [[${name}\n${body}\n]]
 
 ASCname [component @mp1 connector @mp2] = [[${component}${mp1}${connector}${mp2}]]
 
 ASCbody [x] = [[${x}]]
 
 Leaf [CodeBlock] = [[${CodeBlock}]]
-Container [Children Connections] = [[${Children}${Connections}]]
+Container [Children Connections] = [[${Children}\n${Connections}]]
 
 MaybePort_empty [lp rp] = [[()]]
 MaybePort_port [Port] = [[${Port}]]
@@ -17,7 +17,7 @@ Children [k @Component] = [[${k}${Component}]]
 Connections [k @Connection] = [[${k}${Connection}]]
 
 Connection [Sender Connector Receiver @MoreReceiver] =
-  [[${Sender}${Connector}${Receiver}${MoreReceiver}]]
+  [[${Sender}${Connector}${Receiver}${MoreReceiver}\n]]
 MoreReceiver [k Receiver] = [[${k}${Receiver}]]
 
 Sender [Component Port] = [[${Component}${Port}]]
