@@ -3,5 +3,5 @@ all:
 	./run.bash top.asc
 
 dev:
-	./run.bash testtop.asc
+	./run.bash test.asc
 

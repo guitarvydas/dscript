@@ -33,3 +33,8 @@ exports.panic_not_allowed_in_bash = function () {
 exports.manglePortName = function (s) {
     return s.replace (/\$/g, "___");
 }
+
+exports.trimCode = function (s) {
+    return s.trim ();
+}
+

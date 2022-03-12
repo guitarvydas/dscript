@@ -2,7 +2,7 @@ ASCs [@ascs] = {{support.resetNames (); }}[[${ascs}]]
 
 ASC [name body] = 
 {{support.pushComponentName (_name._glue ());}}
-[[${name}\n${body}\n${support.popComponentName ()}]]
+[[${body}\n${support.popComponentName ()}]]
 
 ASCname [name @inputs connector @outputs] = [[${name}]]
 
@@ -17,7 +17,7 @@ OutputPortDef [p] = [[${p}]]
 MaybePort_empty [lp rp] = [[()]]
 MaybePort_port [Port] = [[${Port}]]
   
-CodeBlock [k codeBlock] = [[${k}${codeBlock}]]
+CodeBlock [k codeBlock] = [[${codeBlock}]]
 Children [k @Children] = [[${Children}]]
 Connections [k @Connection] = [[# ${k}\n${Connection}]]
 
@@ -48,7 +48,7 @@ portName_out [k] = [[${k}]]
 portName_chars [@cs] = [[${cs}]]
 portNameChar [c] = [[${c}]]
 Connector [k] = [[${k}]]
-codeBlock [kbegin language @cs kend] = [[${kbegin}${language}${cs}${kend}]]
+codeBlock [kbegin language @cs kend] = [[${support.trimCode (cs)}]]
 language [k] = [[${k}]]
 anyChar_nested [lb @cs rb] = [[${lb}${cs}${rb}]]
 anyChar_flat [c] = [[${c}]]
