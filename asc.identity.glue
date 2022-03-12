@@ -2,7 +2,7 @@ ASCs [@ascs] = [[${ascs}]]
 
 ASC [name body] = [[${name}\n${body}\n]]
 
-ASCname [component @mp1 connector @mp2] = [[${component}${mp1}${connector}${mp2}]]
+ASCname [name @inputs connector @outputs] = [[${name}${inputs}${connector}${outputs}]]
 
 ASCbody [x] = [[${x}]]
 
@@ -38,3 +38,7 @@ codeBlock [kbegin language @cs kend] = [[${kbegin}${language}${cs}${kend}]]
 language [k] = [[${k}]]
 anyChar_nested [lb @cs rb] = [[${lb}${cs}${rb}]]
 anyChar_flat [c] = [[${c}]]
+
+ASCdefName [c] = [[${c}]]
+InputPortDef [name] = [[${name}]]
+OutputPortDef [name] = [[${name}]]

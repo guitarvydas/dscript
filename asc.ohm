@@ -3,7 +3,7 @@ ASCs = ASC+
 
 ASC = ASCname ASCbody
 
-ASCname = Component MaybePort* Connector MaybePort*
+ASCname = ASCdefName InputPortDef* Connector OutputPortDef*
 
 ASCbody
   = Leaf
@@ -12,6 +12,9 @@ ASCbody
 Leaf = CodeBlock
 Container = Children Connections
 
+InputPortDef = MaybePort
+OutputPortDef = MaybePort
+	  
 MaybePort
   = "(" ")" -- empty
   | Port    -- port
@@ -29,6 +32,7 @@ Receiver
   | Component Port -- child
 
 Child = Component
+ASCdefName = Component
 
 
 Component = "[" componentName "]"
