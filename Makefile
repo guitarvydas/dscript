@@ -1,4 +1,7 @@
 all:
-	./identity-run.bash
-	./run.bash
+	./identity-run.bash top.asc
+	./run.bash top.asc
+
+dev:
+	./run.bash testtop.asc
 
