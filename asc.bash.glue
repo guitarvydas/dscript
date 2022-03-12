@@ -1,8 +1,10 @@
 ASCs [@ascs] = [[${ascs}]]
 
-ASC [name body] = [[${name}\n${body}\n]]
+ASC [name body] = 
+{{support.pushComponentName (_name._glue ());}}
+[[${name}\n${body}\n${support.popComponentName ()}]]
 
-ASCname [name @inputs connector @outputs] = [[${name}${inputs}${connector}${outputs}]]
+ASCname [name @inputs connector @outputs] = [[${name}]]
 
 ASCbody [x] = [[${x}]]
 
@@ -43,6 +45,6 @@ language [k] = [[${k}]]
 anyChar_nested [lb @cs rb] = [[${lb}${cs}${rb}]]
 anyChar_flat [c] = [[${c}]]
 
-ASCdefName [c] = [[${c}]]
+ASCdefName [name] = [[${name}]]
 InputPortDef [name] = [[${name}]]
 OutputPortDef [name] = [[${name}]]
