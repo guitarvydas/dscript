@@ -17,7 +17,7 @@ MaybePort
   | Port    -- port
   
 CodeBlock = "code" codeBlock
-Children = "children" Component+
+Children = "children" Child+
 Connections = "connections" Connection+
 
 Connection = Sender Connector Receiver MoreReceiver*
@@ -27,6 +27,9 @@ Sender = Component Port
 Receiver 
   = "$return"      -- return
   | Component Port -- child
+
+Child = Component
+
 
 Component = "[" componentName "]"
 componentName

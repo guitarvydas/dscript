@@ -1,3 +1,5 @@
 #!/bin/bash
 prep=~/projects/prep/prep
-${prep} '.' '$' asc.ohm asc.identity.glue --stop=1 <top.asc
+cdir=`pwd`
+support=${cdir}/support.js
+${prep} '.' '$' asc.ohm asc.bash.glue --stop=1 --support=${support} <top.asc
