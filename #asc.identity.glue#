@@ -1,13 +1,8 @@
-ASCs [@ascs] = {{support.resetNames (); }}[[${ascs}]]
+ASCs [@ascs] = [[${ascs}]]
 
-ASC [name body] = 
-{{support.pushComponentName (_name._glue ());}}
-[[cat >${support.mangleDefName (name)}.bash <<'~~~'\n${body}\n${support.popComponentName ()}
-~~~
-chmod a+x ${support.mangleDefName (name)}.bash
-]]
+ASC [name body] = [[${name}\n${body}\n]]
 
-ASCname [name @inputs connector @outputs] = [[${name}]]
+ASCname [name @inputs connector @outputs] = [[${name}${inputs}${connector}${outputs}]]
 
 ASCbody [x] = [[${x}]]
 
@@ -20,10 +15,10 @@ OutputPortDef [p] = [[${p}]]
 MaybePort_empty [lp rp] = [[()]]
 MaybePort_port [Port] = [[${Port}]]
   
-CodeBlock [k codeBlock] = [[${codeBlock}]]
-Children [k @Children] = [[${Children}]]
+CodeBlock [k codeBlock] = [[${k}${codeBlock}]]
+Children [k @Component] = [[${k}${Component}]]
 Nets [k @Nets] = [[${k}\n${Nets}]]
-Connections [k @Connection] = [[# ${k}\n${Connection}]]
+Connections [k @Connection] = [[${k}${Connection}]]
 
 Net [NetName @NetReceiver] = [[${NetName}${NetReceiver}\n]]
 NetName [k1 @cs k2] = [[${k1}${cs}${k2}]]
@@ -35,7 +30,6 @@ ConnectionSelfSenderChildReceiver [Sender NetName Receiver] = [[${Sender}${NetNa
 ConnectionSelfSenderSelfReceiver [Sender NetName Receiver] = [[${Sender}${NetName}${Receiver}\n]]
 ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[${Sender}${NetName}${Receiver}\n]]
 ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[${Sender}${NetName}${Receiver}\n]]
-
 
 ChildReference [x] = [[${x}]]
 ASCdefName [x] = [[${x}]]
@@ -56,18 +50,19 @@ Component [c] = [[${c}]]
 ChildComponent [lb name rb] = [[${lb}${name}${rb}]]
 selfComponent [lb self rb] = [[${lb}${self}${rb}]]
 
+
+
 componentName_self [k] = [[${k}]]
 componentName_chars [@cs] = [[${cs}]]
 componentNameChar [c] = [[${c}]]
-Port [lp portName rp] = [[${support.manglePortName (portName)}]]
+Port [lp portName rp] = [[${lp}${portName}${rp}]]
 portName_in [k] = [[${k}]]
 portName_out [k] = [[${k}]]
 portName_chars [@cs] = [[${cs}]]
 portNameChar [c] = [[${c}]]
-codeBlock [kbegin language @cs kend] = [[${support.trimCode (cs)}]]
+codeBlock [kbegin language @cs kend] = [[${kbegin}${language}${cs}${kend}]]
 language [k] = [[${k}]]
 anyChar_nested [lb @cs rb] = [[${lb}${cs}${rb}]]
 anyChar_flat [c] = [[${c}]]
-
 netChar [c] = [[${c}]]
 csyn [k] = [[${k}]]

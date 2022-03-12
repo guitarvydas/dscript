@@ -1,4 +1,4 @@
-cat >clone__clean__clean_2.bash <<'~~~'
+cat >[clone__clean__clean_2].bash <<'~~~'
 
 cd ${work}
 rm -rf node_modules
@@ -11,3 +11,5 @@ rm -rf d2py
   
 
 ~~~
+chmod a+x [clone__clean__clean_2].bash
+
