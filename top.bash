@@ -1,33 +1,26 @@
-#!/bin/bash
-# top.asc
-duct-clone-in=/tmp/duct-top-clone-in-${RANDOM}
-duct-clone-out=/tmp/duct-top-clone-out-${RANDOM}
-duct-make-in=/tmp/duct-top-make-in-${RANDOM}
-duct-make-out=/tmp/duct-top-out-${RANDOM}
-duct-exec-in=/tmp/duct-top-exec-in-${RANDOM}
-ductReturn=/tmp/duct-top-Return-${RANDOM}
 
-# [$self]($in) >> [clean]($in)
-echo $1 >${duct-clone-in} &
+# child clone
+duct_clone_in=/tmp/duct_clone_in
+duct_clone_out=/tmp/duct_clone_out
+mkfifo ${duct_clone_in} ${duct_clone_out}
+clone <${duct_clone_in} >${duct_clone_out} &
 
-# [clone]($in) == ${duct-clone-in}
-# [clone]($out) == ${duct-clone-out}
-# [make]($in) == ${duct-make-in}
-# [make]($out) == ${duct-make-out}
-# [exec]($in) == ${duct-exec-in}
-# [exec]($out) == ${ductReturn}
+# child make
+duct_make_in=/tmp/duct_make_in
+duct_make_out=/tmp/duct_make_out
+mkfifo ${duct_make_in} ${duct_make_out}
+make <${duct_make_in} >${duct_make_out} &
 
-# children
-clone=./clone.bash
-make=./make.bash
-exec=./exec.bash
+# child exec
+duct_exec_in=/tmp/duct_exec_in
+duct_exec_out=/tmp/duct_exec_out
+mkfifo ${duct_exec_in} ${duct_exec_out}
+exec <${duct_exec_in} >${duct_exec_out} &
 
-$clone <${duct-clone-in} >${duct-clone-out} &
-child-clone=$!
-$make <${duct-make-in} >${duct-make-out} &
-child-make=$!
-$exec <${duct-exec-in} >${ductReturn} &
-child-exec=$!
+# connections
+cat <${duct_$self____in} >${duct_clone____in} &
+cat <${duct_clone____out} >${duct_make____in} &
+cat <${duct_make____out} >${duct_exec____in} &
+cat <${duct_exec____out} >${$return} &
 
-wait ${child-clone} ${child-make} ${child-exec}
-cat <${ductReturn}
+

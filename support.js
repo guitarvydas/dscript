@@ -35,6 +35,11 @@ exports.manglePortName = function (s) {
 }
 
 exports.trimCode = function (s) {
-    return s.trim ();
+    //return s.trim ();
+    return s;
+}
+
+exports.mangleDefName = function (s) {
+    return s.replace (/ /g, "_").replace (/\//g, "__").replace (/\$/g,"___");
 }
 

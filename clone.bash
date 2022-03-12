@@ -1,16 +1,19 @@
-#!/bin/bash
-# clone.bash
-duct-clone-clean-in=/tmp/duct-clone-clean-in-${RANDOM}
-duct-clone-clean-out=/tmp/duct-clone-clean-out-${RANDOM}
-duct-clone-git_clone-in=/tmp/duct-clone-git_clone-in-${RANDOM}
-ductReturn=/tmp/duct-clone-Return-${RANDOM}
 
-clean=./clone-clean.bash
-git_clone=./clone-git_clone.bash
+# child clean
+duct_clean_in=/tmp/duct_clean_in
+duct_clean_out=/tmp/duct_clean_out
+mkfifo ${duct_clean_in} ${duct_clean_out}
+clean <${duct_clean_in} >${duct_clean_out} &
 
-# [$self]($in) >> [clean]($in)
-echo $1 >${duct-clone-clean-in} &
+# child git clone
+duct_git clone_in=/tmp/duct_git clone_in
+duct_git clone_out=/tmp/duct_git clone_out
+mkfifo ${duct_git clone_in} ${duct_git clone_out}
+git clone <${duct_git clone_in} >${duct_git clone_out} &
 
-$clean <${duct-clone-clean-in} >${duct-clone-clean-out} &
-$git_clone <${duct-clone-git_clone-in} >${ductReturn} &
+# connections
+cat <${duct_$self____in} >${duct_clean____in} &
+cat <${duct_clean____out} >${duct_git clone____in} &
+cat <${duct_git clone____out} >${$return} &
+
 

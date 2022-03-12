@@ -2,7 +2,7 @@ ASCs [@ascs] = {{support.resetNames (); }}[[${ascs}]]
 
 ASC [name body] = 
 {{support.pushComponentName (_name._glue ());}}
-[[${body}\n${support.popComponentName ()}]]
+[[cat >${support.mangleDefName (name)}.bash <<'~~~'\n${body}\n${support.popComponentName ()}\n~~~\n]]
 
 ASCname [name @inputs connector @outputs] = [[${name}]]
 
@@ -38,7 +38,8 @@ mkfifo \$\{duct_${name}_in\} \$\{duct_${name}_out\}
 ${name} <\$\{duct_${name}_in\} >\$\{duct_${name}_out\} &
 ]]
 
-Component [lb componentName rb] = [[${support.mangleChildName (componentName)}]]
+ASCdefName [name] = [[${support.mangleChildName (name)}]]
+Component [lb componentName rb] = [[${componentName}]]
 componentName_self [k] = [[${k}]]
 componentName_chars [@cs] = [[${cs}]]
 componentNameChar [c] = [[${c}]]

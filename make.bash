@@ -1,3 +1,2 @@
-#!/bin/bash
-# make.bash
-make build
+ make build 
+
