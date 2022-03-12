@@ -16,11 +16,11 @@ MaybePort_port [Port] = [[${Port}]]
   
 CodeBlock [k codeBlock] = [[${k}${codeBlock}]]
 Children [k @Children] = [[${Children}]]
-Connections [k @Connection] = [[${k}${Connection}]]
+Connections [k @Connection] = [[${k}\n${Connection}]]
 
 Connection [Sender Connector Receiver @MoreReceiver] =
-  [[${Sender}${Connector}${Receiver}${MoreReceiver}\n]]
-MoreReceiver [k Receiver] = [[${k}${Receiver}]]
+  [[${Sender}${Connector}${Receiver}\n]]
+MoreReceiver [k Receiver] = [[${support.panic_not_allowed_in_bash ()}]]
 
 Sender [Component Port] = [[${Component}${Port}]]
 Receiver_return [k] = [[${k}]]
@@ -28,6 +28,9 @@ Receiver_child [Component Port] = [[${Component}${Port}]]
 
 Child [name] = [[
 # child ${support.mangleChildName (name)}
+duct_${support.mangleChildName (name)}_in=/tmp/duct_${support.mangleChildName (name)}_in
+duct_${support.mangleChildName (name)}_out=/tmp/duct_${support.mangleChildName (name)}_out
+${support.mangleChildName (name)} <\$\{duct_${support.mangleChildName (name)}_in\} >\$\{duct_${support.mangleChildName (name)}_out\} &
 ]]
 
 Component [lb componentName rb] = [[${componentName}]]

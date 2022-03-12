@@ -1,8 +1,8 @@
 var componentPath = [];
-function cpath () { return componentPath.join ('-'); };
+function cpath () { return componentPath.join ('_'); };
 
 exports.mangleChildName = function (s) {
-    return cpath () + "-" + s.replace (/ /g, "-").replace (/\//g, "_");
+    return cpath () + "_" + s.replace (/ /g, "_").replace (/\//g, "__");
 }
 
 exports.pushComponentName = function (s) {
@@ -15,3 +15,7 @@ exports.popComponentName = function () {
     return "";
 }
 
+exports.panic_not_allowed_in_bash = function () {
+    console.error ("*** ERROR: copying to multiple receivers not available in BASH");
+    throw "ERROR";
+}
