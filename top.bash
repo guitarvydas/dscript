@@ -1,19 +1,20 @@
 #!/bin/bash
 # top.asc
-ductA=/tmp/duct_top_A_${RANDOM}
-ductB=/tmp/duct_top_B_${RANDOM}
-ductC=/tmp/duct_top_C_${RANDOM}
-ductD=/tmp/duct_top_D_${RANDOM}
-ductE=/tmp/duct_top_E_${RANDOM}
-ductF=/tmp/duct_top_F_${RANDOM}
-ductReturn=/tmp/duct_top_Return_${RANDOM}
+duct-clone-in=/tmp/duct-top-clone-in-${RANDOM}
+duct-clone-out=/tmp/duct-top-clone-out-${RANDOM}
+duct-make-in=/tmp/duct-top-make-in-${RANDOM}
+duct-make-out=/tmp/duct-top-out-${RANDOM}
+duct-exec-in=/tmp/duct-top-exec-in-${RANDOM}
+ductReturn=/tmp/duct-top-Return-${RANDOM}
 
-# [$self]($in) == ${ductA}
-# [clone]($in) == ${ductB}
-# [clone]($out) == ${ductC}
-# [make]($in) == ${ductD}
-# [make]($out) == ${ductE}
-# [exec]($in) == ${ductF}
+# [$self]($in) >> [clean]($in)
+echo $1 >${duct-clone-in} &
+
+# [clone]($in) == ${duct-clone-in}
+# [clone]($out) == ${duct-clone-out}
+# [make]($in) == ${duct-make-in}
+# [make]($out) == ${duct-make-out}
+# [exec]($in) == ${duct-exec-in}
 # [exec]($out) == ${ductReturn}
 
 # children
@@ -21,12 +22,12 @@ clone=./clone.bash
 make=./make.bash
 exec=./exec.bash
 
-$clone <${ductB} >${ductC} &
-child_clone=$!
-$make <${ductD} >${ductE} &
-child_make=$!
-$exec <${ductF} >${ductReturn} &
-child_exec=$!
+$clone <${duct-clone-in} >${duct-clone-out} &
+child-clone=$!
+$make <${duct-make-in} >${duct-make-out} &
+child-make=$!
+$exec <${duct-exec-in} >${ductReturn} &
+child-exec=$!
 
-wait ${child_clone} ${child_make} ${child_exec}
+wait ${child-clone} ${child-make} ${child-exec}
 cat <${ductReturn}

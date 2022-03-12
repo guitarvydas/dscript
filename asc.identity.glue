@@ -1,0 +1,40 @@
+ASCs [@ascs] = [[${ascs}]]
+
+ASC [name body] = [[${name}${body}]]
+
+ASCname [component @mp1 connector @mp2] = [[${component}${mp1}${connector}${mp2}]]
+
+ASCbody [x] = [[${x}]]
+
+Leaf [CodeBlock] = [[${CodeBlock}]]
+Container [Children Connections] = [[${Children}${Connections}]]
+
+MaybePort_empty [lp rp] = [[()]]
+MaybePort_port [Port] = [[${Port}]]
+  
+CodeBlock [k codeBlock] = [[${k}${codeBlock}]]
+Children [k @Component] = [[${k}${Component}]]
+Connections [k @Connection] = [[${k}${Connection}]]
+
+Connection [Sender Connector Receiver @MoreReceiver] =
+  [[${Sender}${Connector}${Receiver}${MoreReceiver}]]
+MoreReceiver [k Receiver] = [[${k}${Receiver}]]
+
+Sender [Component Port] = [[${Component}${Port}]]
+Receiver_return [k] = [[${k}]]
+Receiver_child [Component Port] = [[${Component}${Port}]]
+
+Component [lb componentName rb] = [[${lb}${componentName}${rb}]]
+componentName_self [k] = [[${k}]]
+componentName_chars [@cs] = [[${cs}]]
+componentNameChar [c] = [[${c}]]
+Port [lp portName rp] = [[${lp}${portName}${rp}]]
+portName_in [k] = [[${k}]]
+portName_out [k] = [[${k}]]
+portName_chars [@cs] = [[${cs}]]
+portNameChar [c] = [[${c}]]
+Connector [k] = [[${k}]]
+codeBlock [kbegin language @cs kend] = [[${kbegin}${language}${cs}${kend}]]
+language [k] = [[${k}]]
+anyChar_nested [lb @cs rb] = [[${lb}${cs}${rb}]]
+anyChar_flat [c] = [[${c}]]
