@@ -61,14 +61,3 @@ exports.debug = function () {
     console.error (componentPath);
     return "";
 }
-
-exports.fullPathName = function (s) {
-    let path = componentPath.join ('_');
-    let name = mangleComponentName (s);
-    if (path) {
-	return path + "_" + name;
-    } else {
-	return name;
-    }
-}
-

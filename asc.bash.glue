@@ -47,7 +47,7 @@ ${support.pushPidName ("pid_" + x)}
 ]]
 ASCdefName [x] = [[${support.mangleName (x)}]]
 
-ChildReference [x] = [[${support.fullPathName (x)}]]
+ChildReference [x] = [[${support.mangleName (x)}]]
 
 SelfSender [selfComponent Port] = [[${selfComponent}${Port}]]
 ChildSender [ChildComponent Port] = [[${ChildComponent}${Port}]]
