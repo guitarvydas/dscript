@@ -1,8 +1,9 @@
 ASCs [@ascs] = {{support.resetNames (); }}[[${ascs}]]
 
 ASC [name body] = 
-{{support.pushComponentName (_name._glue ());}}
-[[cat >${name}.ascbash <<'~~~'\n${body}\n${support.popComponentName ()}
+[[cat >${name}.ascbash <<'~~~'
+#!/bin/bash
+${body}
 ~~~
 chmod a+x ${name}.ascbash
 ]]
@@ -31,19 +32,19 @@ NetReceiver [c] = [[${c}]]
 
 Connection [x] = [[${x}]]
 
-ConnectionSelfSenderChildReceiver [Sender NetName Receiver] = [[cat \$1 >\$\{duct.${Receiver}\} &\n]]
-ConnectionSelfSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct.${Sender}\} >\$\{duct.${Receiver}\}\n]]
-ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[cat <\$\{duct.${Sender}\} >\$\{duct.${Receiver}\} &\n]]
-ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct.${Sender}\}\n]]
+ConnectionSelfSenderChildReceiver [Sender NetName Receiver] = [[cat \$1 >\$\{duct_${Receiver}\} &\n]]
+ConnectionSelfSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\} >\$\{duct_${Receiver}\}\n]]
+ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\} >\$\{duct_${Receiver}\} &\n]]
+ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\}\n]]
 
 
 ChildReferenceInChildren [x] = [[
 # child ${x}
-duct.${x}.in=/tmp/duct.${x}.in
-duct.${x}.out=/tmp/duct.${x}.out
-${x}.ascbash <\$\{duct.${x}.in\} >\$\{duct.${x}.out\} &
-pid.${x}=$!
-${support.pushPidName ("pid." + x)}
+duct_${x}_in=/tmp/duct_${x}_in
+duct_${x}_out=/tmp/duct_${x}_out
+${x}.ascbash <\$\{duct_${x}_in\} >\$\{duct_${x}_out\} &
+pid_${x}=$!
+${support.pushPidName ("pid_" + x)}
 ]]
 ASCdefName [x] = [[${support.mangleName (x)}]]
 

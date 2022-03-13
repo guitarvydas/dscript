@@ -1,12 +1,13 @@
+var sep = "_";
 var componentPath = [];
 var pidNames = [];
 
 exports.resetNames = function () { componentPath = []; childrenNames = []; }
 
 function cpath () { 
-    let path = componentPath.join ('.');
+    let path = componentPath.join (sep);
     if (path) {
-	return path + ".";
+	return path + sep;
     } else {
 	return "";
     }
@@ -28,7 +29,7 @@ exports.panic_not_allowed_in_bash = function () {
 }
 
 exports.manglePortName = function (s) {
-    return s.replace (/\$/g, ".");
+    return s.replace (/\$/g, sep);
 }
 
 exports.trimCode = function (s) {
@@ -37,7 +38,7 @@ exports.trimCode = function (s) {
 }
 
 function mangleComponentName (s) {
-    return s.replace (/ /g, ".").replace (/\//g, ".").replace (/\$/g,".");
+    return s.replace (/ /g, sep).replace (/\//g, sep).replace (/\$/g, sep);
 }
 
 exports.mangleName = function (s) {
