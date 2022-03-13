@@ -10,5 +10,7 @@ bashasc:
 
 
 dev:
+	clear
 	./run.bash test.asc >test.bash
+	cat test.bash
 
