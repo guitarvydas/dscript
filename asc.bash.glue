@@ -41,7 +41,7 @@ ChildReferenceInChildren [x] = [[
 # child ${x}
 duct_${x}___in=/tmp/duct_${x}___in
 duct_${x}___out=/tmp/duct_${x}___out
-${x} <\$\{duct_${x}___in\} >\$\{duct_${x}___out\} &
+${x}.bash <\$\{duct_${x}___in\} >\$\{duct_${x}___out\} &
 pid_${x}=$!
 ${support.pushPidName ("pid_" + x)}
 ]]
