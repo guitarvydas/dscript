@@ -1,5 +1,5 @@
 
-    cd ${work}
+    cd $work
     rm -rf node_modules
     rm -rf prep
     rm -rf d2f
