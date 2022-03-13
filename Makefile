@@ -7,7 +7,7 @@ top:
 	./run.bash top.asc >_heredoc.bash
 	chmod a+x _heredoc.bash
 	./_heredoc.bash
-
+	rm _heredoc.bash
 
 dev:
 	clear

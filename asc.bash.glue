@@ -2,9 +2,9 @@ ASCs [@ascs] = {{support.resetNames (); }}[[${ascs}]]
 
 ASC [name body] = 
 {{support.pushComponentName (_name._glue ());}}
-[[cat >${name}.bash <<'~~~'\n${body}\n${support.popComponentName ()}
+[[cat >${name}.ascbash <<'~~~'\n${body}\n${support.popComponentName ()}
 ~~~
-chmod a+x ${name}.bash
+chmod a+x ${name}.ascbash
 ]]
 
 ASCname [name @inputs connector @outputs] = [[${name}]]
@@ -41,7 +41,7 @@ ChildReferenceInChildren [x] = [[
 # child ${x}
 duct_${x}___in=/tmp/duct_${x}___in
 duct_${x}___out=/tmp/duct_${x}___out
-${x}.bash <\$\{duct_${x}___in\} >\$\{duct_${x}___out\} &
+${x}.ascbash <\$\{duct_${x}___in\} >\$\{duct_${x}___out\} &
 pid_${x}=$!
 ${support.pushPidName ("pid_" + x)}
 ]]
