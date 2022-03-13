@@ -1,9 +1,9 @@
-all: identity bashasc
+all: identity top
 
 identity:
 	./identity-run.bash top.asc
 
-bashasc:
+top:
 	./run.bash top.asc >_heredoc.bash
 	chmod a+x _heredoc.bash
 	./_heredoc.bash

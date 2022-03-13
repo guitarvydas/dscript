@@ -1,26 +1,29 @@
 
-# child clone
+# child top_clone
 duct_top_clone___in=/tmp/duct_top_clone___in
 duct_top_clone___out=/tmp/duct_top_clone___out
-mkfifo ${duct_top_clone___in} ${duct_top_clone___out}
 top_clone <${duct_top_clone___in} >${duct_top_clone___out} &
+pid_top_clone=$!
 
-# child make
+
+# child top_make
 duct_top_make___in=/tmp/duct_top_make___in
 duct_top_make___out=/tmp/duct_top_make___out
-mkfifo ${duct_top_make___in} ${duct_top_make___out}
 top_make <${duct_top_make___in} >${duct_top_make___out} &
+pid_top_make=$!
 
-# child exec
+
+# child top_exec
 duct_top_exec___in=/tmp/duct_top_exec___in
 duct_top_exec___out=/tmp/duct_top_exec___out
-mkfifo ${duct_top_exec___in} ${duct_top_exec___out}
 top_exec <${duct_top_exec___in} >${duct_top_exec___out} &
+pid_top_exec=$!
+
 
 # connections
-echo $1 >${duct_top_clone____in} &
-cat <${top_clone___out} >${duct_top_make____in} &
-cat <${top_make___out} >${duct_top_exec____in} &
-cat <${top_exec___out} >${$return} &
+cat $1 >top_clone____in &
+cat <clone___out >top_make____in &
+cat <make___out >top_exec____in &
+cat <exec___out
 
 

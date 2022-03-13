@@ -17,7 +17,7 @@ exports.mangleChildName = function (s) {
 }
 
 exports.pushComponentName = function (s) {
-    componentPath.push (s);
+    componentPath.push (mangleComponentName (s));
     return "";
 }
 
@@ -40,8 +40,12 @@ exports.trimCode = function (s) {
     return s;
 }
 
-exports.mangleDefName = function (s) {
+function mangleComponentName (s) {
     return s.replace (/ /g, "_").replace (/\//g, "__").replace (/\$/g,"___");
+}
+
+exports.mangleDefName = function (s) {
+    return mangleComponentName (s);
 }
 
 exports.listPids = function () {
@@ -54,5 +58,10 @@ exports.listPids = function () {
 
 exports.pushPidName = function (n) {
     pidNames.push (n);
+    return "";
+}
+
+exports.debug = function () {
+    console.error (componentPath);
     return "";
 }

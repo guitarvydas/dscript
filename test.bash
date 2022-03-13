@@ -1,33 +1,27 @@
-cat >top.bash <<'~~~'
+cat >clone__clean.bash <<'~~~'
 
-# child top_clone
-duct_top_clone___in=/tmp/duct_top_clone___in
-duct_top_clone___out=/tmp/duct_top_clone___out
-top_clone <${duct_top_clone___in} >${duct_top_clone___out} &
-pid_top_clone=$!
+# child clone__clean_clean_1
 
-
-# child top_make
-duct_top_make___in=/tmp/duct_top_make___in
-duct_top_make___out=/tmp/duct_top_make___out
-top_make <${duct_top_make___in} >${duct_top_make___out} &
-pid_top_make=$!
+duct_clone__clean_clean_1___in=/tmp/duct_clone__clean_clean_1___in
+duct_clone__clean_clean_1___out=/tmp/duct_clone__clean_clean_1___out
+clone__clean_clean_1 <${duct_clone__clean_clean_1___in} >${duct_clone__clean_clean_1___out} &
+pid_clone__clean_clean_1=$!
 
 
-# child top_exec
-duct_top_exec___in=/tmp/duct_top_exec___in
-duct_top_exec___out=/tmp/duct_top_exec___out
-top_exec <${duct_top_exec___in} >${duct_top_exec___out} &
-pid_top_exec=$!
+# child clone__clean_clean_2
+
+duct_clone__clean_clean_2___in=/tmp/duct_clone__clean_clean_2___in
+duct_clone__clean_clean_2___out=/tmp/duct_clone__clean_clean_2___out
+clone__clean_clean_2 <${duct_clone__clean_clean_2___in} >${duct_clone__clean_clean_2___out} &
+pid_clone__clean_clean_2=$!
 
 
 # connections
-cat $1 >top_clone____in &
-cat <clone___out >top_make____in &
-cat <make___out >top_exec____in &
-cat <exec___out
+cat $1 >clone__clean_clean_1____in &
+cat <clean 1___out >clone__clean_clean_2____in &
+cat <clean 2___out
 
 
 ~~~
-chmod a+x top.bash
+chmod a+x clone__clean.bash
 
