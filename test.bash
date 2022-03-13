@@ -22,4 +22,9 @@ cat <${duct_clone__cleanclean_2___out}
 
 ~~~
 chmod a+x clone__clean.bash
+cat >clone__clean__clean_1.bash <<'~~~'
+ make clean
+
+~~~
+chmod a+x clone__clean__clean_1.bash
 
