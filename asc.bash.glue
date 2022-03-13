@@ -10,7 +10,8 @@ chmod a+x ${name}.ascbash
 
 ASCname [name @inputs connector @outputs] = [[${name}]]
 
-ASCbody [x] = [[${x}]]
+ASCbody [x] = [[${x}
+wait ${support.listPids ()}]]
 
 Leaf [CodeBlock] = [[${CodeBlock}]]
 Container [Children Nets Connections] = [[${Children}\n${Connections}]]
