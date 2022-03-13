@@ -42,8 +42,8 @@ ChildReferenceInChildren [x] = [[
 duct.${x}.in=/tmp/duct.${x}.in
 duct.${x}.out=/tmp/duct.${x}.out
 ${x}.ascbash <\$\{duct.${x}.in\} >\$\{duct.${x}.out\} &
-pid_${x}=$!
-${support.pushPidName ("pid_" + x)}
+pid.${x}=$!
+${support.pushPidName ("pid." + x)}
 ]]
 ASCdefName [x] = [[${support.mangleName (x)}]]
 

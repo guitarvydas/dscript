@@ -4,9 +4,9 @@ var pidNames = [];
 exports.resetNames = function () { componentPath = []; childrenNames = []; }
 
 function cpath () { 
-    let path = componentPath.join ('_');
+    let path = componentPath.join ('.');
     if (path) {
-	return path + "_";
+	return path + ".";
     } else {
 	return "";
     }
@@ -28,7 +28,7 @@ exports.panic_not_allowed_in_bash = function () {
 }
 
 exports.manglePortName = function (s) {
-    return s.replace (/\$/g, "___");
+    return s.replace (/\$/g, ".");
 }
 
 exports.trimCode = function (s) {
