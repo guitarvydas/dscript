@@ -37,7 +37,7 @@ exports.trimCode = function (s) {
 }
 
 function mangleComponentName (s) {
-    return s.replace (/ /g, "_").replace (/\//g, "__").replace (/\$/g,"___");
+    return s.replace (/ /g, ".").replace (/\//g, ".").replace (/\$/g,".");
 }
 
 exports.mangleName = function (s) {

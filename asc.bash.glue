@@ -31,17 +31,17 @@ NetReceiver [c] = [[${c}]]
 
 Connection [x] = [[${x}]]
 
-ConnectionSelfSenderChildReceiver [Sender NetName Receiver] = [[cat \$1 >\$\{duct_${Receiver}\} &\n]]
-ConnectionSelfSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\} >\$\{duct_${Receiver}\}\n]]
-ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\} >\$\{duct_${Receiver}\} &\n]]
-ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\}\n]]
+ConnectionSelfSenderChildReceiver [Sender NetName Receiver] = [[cat \$1 >\$\{duct.${Receiver}\} &\n]]
+ConnectionSelfSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct.${Sender}\} >\$\{duct.${Receiver}\}\n]]
+ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[cat <\$\{duct.${Sender}\} >\$\{duct.${Receiver}\} &\n]]
+ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct.${Sender}\}\n]]
 
 
 ChildReferenceInChildren [x] = [[
 # child ${x}
-duct_${x}___in=/tmp/duct_${x}___in
-duct_${x}___out=/tmp/duct_${x}___out
-${x}.ascbash <\$\{duct_${x}___in\} >\$\{duct_${x}___out\} &
+duct.${x}.in=/tmp/duct.${x}.in
+duct.${x}.out=/tmp/duct.${x}.out
+${x}.ascbash <\$\{duct.${x}.in\} >\$\{duct.${x}.out\} &
 pid_${x}=$!
 ${support.pushPidName ("pid_" + x)}
 ]]
