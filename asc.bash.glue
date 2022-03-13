@@ -43,7 +43,7 @@ ChildReferenceInChildren [x] = [[
 duct_${x}_in=/tmp/duct_${x}_in
 touch /tmp/duct_${x}_in
 duct_${x}_out=/tmp/duct_${x}_out
-${x}.ascbash <\$\{duct_${x}_in\} >\$\{duct_${x}_out\} &
+./${x}.ascbash <\$\{duct_${x}_in\} >\$\{duct_${x}_out\} &
 pid_${x}=$!
 ${support.pushPidName ("pid_" + x)}
 ]]
