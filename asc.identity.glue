@@ -41,7 +41,6 @@ SelfReceiver_return [r] = [[${r}]]
 SelfReceiver_selfWithPort [c p] = [[${c}${p}]]
 ChildReceiver [c p] = [[${c}${p}]]
 
-ReceiverComponent [c] = [[${c}]]
 SenderPort [p] = [[${p}]]
 ReceiverPort [p] = [[${p}]]
 

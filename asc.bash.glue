@@ -2,9 +2,9 @@ ASCs [@ascs] = {{support.resetNames (); }}[[${ascs}]]
 
 ASC [name body] = 
 {{support.pushComponentName (_name._glue ());}}
-[[cat >${support.mangleDefName (name)}.bash <<'~~~'\n${body}\n${support.popComponentName ()}
+[[cat >${name}.bash <<'~~~'\n${body}\n${support.popComponentName ()}
 ~~~
-chmod a+x ${support.mangleDefName (name)}.bash
+chmod a+x ${name}.bash
 ]]
 
 ASCname [name @inputs connector @outputs] = [[${name}]]
@@ -37,24 +37,25 @@ ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[cat <\$\{duct_$
 ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\}\n]]
 
 
-ChildReference [x] = [[
-# child ${support.mangleChildName (x)}
-duct_${support.mangleChildName (x)}___in=/tmp/duct_${support.mangleChildName (x)}___in
-duct_${support.mangleChildName (x)}___out=/tmp/duct_${support.mangleChildName (x)}___out
-${support.mangleChildName (x)} <\$\{duct_${support.mangleChildName (x)}___in\} >\$\{duct_${support.mangleChildName (x)}___out\} &
-pid_${support.mangleChildName (x)}=$!
-${support.pushPidName ("pid_" + support.mangleChildName (x))}
+ChildReferenceInChildren [x] = [[
+# child ${x}
+duct_${x}___in=/tmp/duct_${x}___in
+duct_${x}___out=/tmp/duct_${x}___out
+${x} <\$\{duct_${x}___in\} >\$\{duct_${x}___out\} &
+pid_${x}=$!
+${support.pushPidName ("pid_" + x)}
 ]]
-ASCdefName [x] = [[${x}]]
+ASCdefName [x] = [[${support.mangleName (x)}]]
+
+ChildReference [x] = [[${support.fullPathName (x)}]]
 
 SelfSender [selfComponent Port] = [[${selfComponent}${Port}]]
 ChildSender [ChildComponent Port] = [[${ChildComponent}${Port}]]
 
 SelfReceiver_return [r] = [[${r}]]
 SelfReceiver_selfWithPort [c p] = [[${c}${p}]]
-ChildReceiver [c p] = [[${support.mangleChildName (c)}_${p}]]
+ChildReceiver [c p] = [[${c}_${p}]]
 
-ReceiverComponent [c] = [[${c}]]
 SenderPort [p] = [[${p}]]
 ReceiverPort [p] = [[${p}]]
 

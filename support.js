@@ -12,10 +12,6 @@ function cpath () {
     }
 }	
 
-exports.mangleChildName = function (s) {
-    return cpath () + s.replace (/ /g, "_").replace (/\//g, "__").replace (/\$/g,"___");
-}
-
 exports.pushComponentName = function (s) {
     componentPath.push (mangleComponentName (s));
     return "";
@@ -44,7 +40,7 @@ function mangleComponentName (s) {
     return s.replace (/ /g, "_").replace (/\//g, "__").replace (/\$/g,"___");
 }
 
-exports.mangleDefName = function (s) {
+exports.mangleName = function (s) {
     return mangleComponentName (s);
 }
 
@@ -64,4 +60,8 @@ exports.pushPidName = function (n) {
 exports.debug = function () {
     console.error (componentPath);
     return "";
+}
+
+exports.fullPathName = function (s) {
+    return componentPath.join ('_') + mangleComponentName (s);
 }

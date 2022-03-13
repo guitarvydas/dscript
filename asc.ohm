@@ -20,7 +20,7 @@ MaybePort
   | Port    -- port
   
 CodeBlock = "code" codeBlock
-Children = "children" ChildReference+
+Children = "children" ChildReferenceInChildren+
 Nets = "nets" Net+
 Connections = "connections" Connection+
 
@@ -41,20 +41,20 @@ ConnectionSelfSenderSelfReceiver = SelfSender NetName SelfReceiver
 ConnectionChildSenderChildReceiver = ChildSender NetName ChildReceiver
 ConnectionChildSenderSelfReceiver = ChildSender NetName SelfReceiver
 
+ChildReferenceInChildren = ChildReference
 ChildReference = ChildComponent
 ASCdefName = Component
 
 
 SelfSender = selfComponent SenderPort
-ChildSender = ChildComponent SenderPort
+ChildSender = ChildReference SenderPort
 
 SelfReceiver 
   = "$return"                  -- return
   | selfComponent ReceiverPort -- selfWithPort
 ChildReceiver 
-  = ReceiverComponent ReceiverPort
+  = ChildReference ReceiverPort
 
-ReceiverComponent = ChildComponent
 SenderPort = Port
 ReceiverPort = Port
 
