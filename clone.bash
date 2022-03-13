@@ -14,8 +14,8 @@ pid_clone_git_clone=$!
 
 
 # connections
-cat $1 >clone_clean____in &
-cat <clean___out >clone_git_clone____in &
-cat <git clone___out
+cat $1 >${duct_clone_clean____in} &
+cat <${duct_clean___out} >${duct_clone_git_clone____in} &
+cat <${duct_git clone___out}
 
 

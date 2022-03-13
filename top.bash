@@ -21,9 +21,9 @@ pid_top_exec=$!
 
 
 # connections
-cat $1 >top_clone____in &
-cat <clone___out >top_make____in &
-cat <make___out >top_exec____in &
-cat <exec___out
+cat $1 >${duct_top_clone____in} &
+cat <${duct_clone___out} >${duct_top_make____in} &
+cat <${duct_make___out} >${duct_top_exec____in} &
+cat <${duct_exec___out}
 
 

@@ -14,8 +14,8 @@ pid_clone__clean_clean_2=$!
 
 
 # connections
-cat $1 >clone__clean_clean_1____in &
-cat <clean 1___out >clone__clean_clean_2____in &
-cat <clean 2___out
+cat $1 >${duct_clone__clean_clean_1____in} &
+cat <${duct_clean 1___out} >${duct_clone__clean_clean_2____in} &
+cat <${duct_clean 2___out}
 
 

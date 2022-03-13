@@ -31,10 +31,10 @@ NetReceiver [c] = [[${c}]]
 
 Connection [x] = [[${x}]]
 
-ConnectionSelfSenderChildReceiver [Sender NetName Receiver] = [[cat \$1 >${Receiver} &\n]]
-ConnectionSelfSenderSelfReceiver [Sender NetName Receiver] = [[cat <${Sender} >${Receiver}\n]]
-ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[cat <${Sender} >${Receiver} &\n]]
-ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[cat <${Sender}\n]]
+ConnectionSelfSenderChildReceiver [Sender NetName Receiver] = [[cat \$1 >\$\{duct_${Receiver}\} &\n]]
+ConnectionSelfSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\} >\$\{duct_${Receiver}\}\n]]
+ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\} >\$\{duct_${Receiver}\} &\n]]
+ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[cat <\$\{duct_${Sender}\}\n]]
 
 
 ChildReference [x] = [[
