@@ -1,21 +1,21 @@
 
-# child cloneclean
-duct_cloneclean___in=/tmp/duct_cloneclean___in
-duct_cloneclean___out=/tmp/duct_cloneclean___out
-cloneclean <${duct_cloneclean___in} >${duct_cloneclean___out} &
-pid_cloneclean=$!
+# child clone_clean
+duct_clone_clean___in=/tmp/duct_clone_clean___in
+duct_clone_clean___out=/tmp/duct_clone_clean___out
+clone_clean <${duct_clone_clean___in} >${duct_clone_clean___out} &
+pid_clone_clean=$!
 
 
-# child clonegit_clone
-duct_clonegit_clone___in=/tmp/duct_clonegit_clone___in
-duct_clonegit_clone___out=/tmp/duct_clonegit_clone___out
-clonegit_clone <${duct_clonegit_clone___in} >${duct_clonegit_clone___out} &
-pid_clonegit_clone=$!
+# child clone_git_clone
+duct_clone_git_clone___in=/tmp/duct_clone_git_clone___in
+duct_clone_git_clone___out=/tmp/duct_clone_git_clone___out
+clone_git_clone <${duct_clone_git_clone___in} >${duct_clone_git_clone___out} &
+pid_clone_git_clone=$!
 
 
 # connections
-cat $1 >${duct_cloneclean____in} &
-cat <${duct_cloneclean___out} >${duct_clonegit_clone____in} &
-cat <${duct_clonegit_clone___out}
+cat $1 >${duct_clone_clean___in} &
+cat <${duct_clone_clean___out} >${duct_clone_git_clone___in} &
+cat <${duct_clone_git_clone___out}
 
 

@@ -54,7 +54,7 @@ ChildSender [ChildComponent Port] = [[${ChildComponent}${Port}]]
 
 SelfReceiver_return [r] = [[${r}]]
 SelfReceiver_selfWithPort [c p] = [[${c}${p}]]
-ChildReceiver [c p] = [[${c}_${p}]]
+ChildReceiver [c p] = [[${c}${p}]]
 
 SenderPort [p] = [[${p}]]
 ReceiverPort [p] = [[${p}]]
