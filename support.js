@@ -1,6 +1,7 @@
 var componentPath = [];
+var pidNames = [];
 
-exports.resetNames = function () { componentPath = []; }
+exports.resetNames = function () { componentPath = []; childrenNames = []; }
 
 function cpath () { 
     let path = componentPath.join ('_');
@@ -43,3 +44,15 @@ exports.mangleDefName = function (s) {
     return s.replace (/ /g, "_").replace (/\//g, "__").replace (/\$/g,"___");
 }
 
+exports.listPids = function () {
+    let result = "";
+    pidNames.forEach (n => {
+	result += "$" + n + " ";
+    });
+    return result;
+}
+
+exports.pushPidName = function (n) {
+    pidNames.push (n);
+    return "";
+}

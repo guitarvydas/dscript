@@ -12,7 +12,7 @@ ASCname [name @inputs connector @outputs] = [[${name}]]
 ASCbody [x] = [[${x}]]
 
 Leaf [CodeBlock] = [[${CodeBlock}]]
-Container [Children Nets Connections] = [[${Children}\n${Nets}\n${Connections}]]
+Container [Children Nets Connections] = [[${Children}\n${Connections}]]
 
 InputPortDef [p] = [[${p}]]
 OutputPortDef [p] = [[${p}]]
@@ -31,13 +31,20 @@ NetReceiver [c] = [[${c}]]
 
 Connection [x] = [[${x}]]
 
-ConnectionSelfSenderChildReceiver [Sender NetName Receiver] = [[${Sender}${NetName}${Receiver}\n]]
-ConnectionSelfSenderSelfReceiver [Sender NetName Receiver] = [[${Sender}${NetName}${Receiver}\n]]
-ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[${Sender}${NetName}${Receiver}\n]]
-ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[${Sender}${NetName}${Receiver}\n]]
+ConnectionSelfSenderChildReceiver [Sender NetName Receiver] = [[cat \$1 >${Receiver} &\n]]
+ConnectionSelfSenderSelfReceiver [Sender NetName Receiver] = [[cat <${Sender} >${Receiver}\n]]
+ConnectionChildSenderChildReceiver [Sender NetName Receiver] = [[cat <${Sender} >${Receiver} &\n]]
+ConnectionChildSenderSelfReceiver [Sender NetName Receiver] = [[cat <${Sender}\n]]
 
 
-ChildReference [x] = [[${x}]]
+ChildReference [x] = [[
+# child ${support.mangleChildName (x)}
+duct_${support.mangleChildName (x)}___in=/tmp/duct_${support.mangleChildName (x)}___in
+duct_${support.mangleChildName (x)}___out=/tmp/duct_${support.mangleChildName (x)}___out
+${support.mangleChildName (x)} <\$\{duct_${support.mangleChildName (x)}___in\} >\$\{duct_${support.mangleChildName (x)}___out\} &
+pid_${support.mangleChildName (x)}=$!
+${support.pushPidName ("pid_" + support.mangleChildName (x))}
+]]
 ASCdefName [x] = [[${x}]]
 
 SelfSender [selfComponent Port] = [[${selfComponent}${Port}]]
@@ -45,17 +52,18 @@ ChildSender [ChildComponent Port] = [[${ChildComponent}${Port}]]
 
 SelfReceiver_return [r] = [[${r}]]
 SelfReceiver_selfWithPort [c p] = [[${c}${p}]]
-ChildReceiver [c p] = [[${c}${p}]]
+ChildReceiver [c p] = [[${support.mangleChildName (c)}_${p}]]
 
 ReceiverComponent [c] = [[${c}]]
 SenderPort [p] = [[${p}]]
 ReceiverPort [p] = [[${p}]]
 
+ChildComponent [lb name rb] = [[${name}]]
+selfComponent [lb self rb] = [[${self}]]
+
+
 
 Component [c] = [[${c}]]
-ChildComponent [lb name rb] = [[${lb}${name}${rb}]]
-selfComponent [lb self rb] = [[${lb}${self}${rb}]]
-
 componentName_self [k] = [[${k}]]
 componentName_chars [@cs] = [[${cs}]]
 componentNameChar [c] = [[${c}]]
@@ -66,7 +74,7 @@ portName_chars [@cs] = [[${cs}]]
 portNameChar [c] = [[${c}]]
 codeBlock [kbegin language @cs kend] = [[${support.trimCode (cs)}]]
 language [k] = [[${k}]]
-anyChar_nested [lb @cs rb] = [[${lb}${cs}${rb}]]
+anyChar_nested [lb @cs rb] = [[${cs}]]
 anyChar_flat [c] = [[${c}]]
 
 netChar [c] = [[${c}]]
