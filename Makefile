@@ -14,3 +14,7 @@ dev:
 	./run.bash test.asc >test.bash
 	cat test.bash
 
+clean:
+	rm -f *.ascbash
+	rm -f _heredoc.bash
+	rm -f test.bash
